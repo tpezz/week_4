@@ -6,7 +6,7 @@
 For Assignment 4 in MSDS 431, I compare linear regression results from Go with results from Python and R, using The Anscombe Quartet datasets.
 
 # Results
-- All three languages produced nearly identical slope and intercept values, aligning closely with expected theoretical values.
+- All three languages produced nearly identical slope and intercept values, aligning closely with expected theoretical values
 - Small variations in the computed slopes and intercepts were seen but also expected
 - Go was the fastest and is the best choice for raw speed and execution efficiency
 - Python was also fast and had great east of use
