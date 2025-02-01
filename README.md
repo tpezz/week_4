@@ -12,6 +12,12 @@ For Assignment 4 in MSDS 431, I compare linear regression results from Go with r
 - Python was also fast and had great east of use
 - R is relatively slower but remains powerful for more complex statistical modeling and larger datasets
 
+# Files
+- Main.go = linear regression in Go
+- Main_test.go = test file for main.go
+- Python_stats.py = linear regression in Python
+- R_stats.r = linear regression in R
+
 # Dataset
 Kaggle Data Anscombe's quartet [LINK](https://www.kaggle.com/datasets/carlmcbrideellis/data-anscombes-quartet?resource=download)
 

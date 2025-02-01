@@ -33,7 +33,7 @@ regression <- function(x, y) {
 results <- list()
 timings <- numeric(4)
 
-#loop over data and perform regression
+#loop over data and perform regressions
 for (i in 1:4) {
   start_time <- Sys.time()
   res <- regression(anscombe_x[[i]], anscombe_y[[i]])
