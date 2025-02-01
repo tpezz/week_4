@@ -7,19 +7,20 @@ import (
 	"strconv"
 	"time"
 
-	"github.com/montanaflynn/stats"
+	"gonum.org/v1/gonum/stat"
 )
 
 // Read CSV file and extract data in the right format
-func readCSV(filePath string) []stats.Series {
+func readCSV(filePath string) ([][]float64, [][]float64) {
 	file, _ := os.Open(filePath)
 	defer file.Close()
 
 	reader := csv.NewReader(file)
 	records, _ := reader.ReadAll()
 
-	// Create stats.Series which is what stats.LinearRegression takes as an input for each part of the CSV
-	datasets := make([]stats.Series, 4)
+	// Create slices to store X and Y values separately
+	xVals := make([][]float64, 4)
+	yVals := make([][]float64, 4)
 
 	//Iterate through rows
 	for i, row := range records {
@@ -30,21 +31,26 @@ func readCSV(filePath string) []stats.Series {
 		}
 
 		//For each row, convert each column to a float
-		xVal, _ := strconv.ParseFloat(row[0], 64)
-		yVal1, _ := strconv.ParseFloat(row[1], 64)
-		yVal2, _ := strconv.ParseFloat(row[2], 64)
-		yVal3, _ := strconv.ParseFloat(row[3], 64)
-		xVal4, _ := strconv.ParseFloat(row[4], 64)
-		yVal4, _ := strconv.ParseFloat(row[5], 64)
+		x123, _ := strconv.ParseFloat(row[0], 64)
+		y1, _ := strconv.ParseFloat(row[1], 64)
+		y2, _ := strconv.ParseFloat(row[2], 64)
+		y3, _ := strconv.ParseFloat(row[3], 64)
+		x4, _ := strconv.ParseFloat(row[4], 64)
+		y4, _ := strconv.ParseFloat(row[5], 64)
 
 		//append varible to store them
-		datasets[0] = append(datasets[0], stats.Coordinate{X: xVal, Y: yVal1})
-		datasets[1] = append(datasets[1], stats.Coordinate{X: xVal, Y: yVal2})
-		datasets[2] = append(datasets[2], stats.Coordinate{X: xVal, Y: yVal3})
-		datasets[3] = append(datasets[3], stats.Coordinate{X: xVal4, Y: yVal4})
+		xVals[0] = append(xVals[0], x123)
+		xVals[1] = append(xVals[1], x123)
+		xVals[2] = append(xVals[2], x123)
+		xVals[3] = append(xVals[3], x4)
+
+		yVals[0] = append(yVals[0], y1)
+		yVals[1] = append(yVals[1], y2)
+		yVals[2] = append(yVals[2], y3)
+		yVals[3] = append(yVals[3], y4)
 	}
 
-	return datasets
+	return xVals, yVals
 }
 
 func main() {
@@ -52,23 +58,23 @@ func main() {
 	filePath := "Anscombe_quartet_data.csv"
 
 	// Read CSV and get datasets
-	datasets := readCSV(filePath)
+	xVals, yVals := readCSV(filePath)
 
 	// create slices with lenth of 4 for the results and timing
 	results := make([][2]float64, 4)
 	timings := make([]float64, 4)
 
 	//Iterate through each row
-	for i := range datasets {
+	for i := range yVals {
 		//start time
 		start := time.Now()
 
 		//perform linear regression
-		params, _ := stats.LinearRegression(datasets[i])
+		slope, intercept := stat.LinearRegression(xVals[i], yVals[i], nil, false)
 		//end time
 		elapsed := time.Since(start).Seconds()
 		//store results
-		results[i] = [2]float64{params[1].Y, params[0].Y} // slope and intercept
+		results[i] = [2]float64{slope, intercept}
 		timings[i] = elapsed
 	}
 
