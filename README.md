@@ -11,7 +11,19 @@ Dataset: Kaggle Data: Anscombe's quartet (https://www.kaggle.com/datasets/carlmc
 | 11.0 | 8.33 | 9.26 | 7.81 | 8.0 | 8.47 |
 
 
-Python Regression Results:
+Go Linear regression results
+
+Dataset 1: Slope = 7.00082, Intercept = 8.00100
+Time = 0.000025958 seconds
+Dataset 2: Slope = 7.00091, Intercept = 8.00091
+Time = 0.000000208 seconds
+Dataset 3: Slope = 7.00027, Intercept = 7.99973
+Time = 0.000000125 seconds
+Dataset 4: Slope = 7.00100, Intercept = 7.00100
+Time = 0.000000083 seconds
+
+
+Python Linear regression Results:
 
 The slopes and intercepts are very close to the expected values:
 Expected Slope ≈ 0.5
@@ -25,3 +37,14 @@ Dataset 1: Slope = 0.50009, Intercept = 3.00009, Time = 0.00026
 Dataset 2: Slope = 0.50000, Intercept = 3.00091, Time = 0.00005
 Dataset 3: Slope = 0.49973, Intercept = 3.00245, Time = 0.00004
 Dataset 4: Slope = 0.49991, Intercept = 3.00173, Time = 0.00004
+
+
+R Linear regression Results:
+Dataset 1: Slope = 0.50009, Intercept = 3.00009
+Time = 0.00302 seconds
+Dataset 2: Slope = 0.50000, Intercept = 3.00091
+Time = 0.00193 seconds
+Dataset 3: Slope = 0.49973, Intercept = 3.00245
+Time = 0.00027 seconds
+Dataset 4: Slope = 0.49991, Intercept = 3.00173
+Time = 0.00025 seconds
